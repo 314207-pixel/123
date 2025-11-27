@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>隨機抽獎</title>
+  <style>
+    body {
+      font-family: "Microsoft JhengHei";
+      text-align: center;
+      background: #f7f7f7;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    textarea {
+      width: 300px;
+      height: 150px;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    #drawBtn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 20px;
+      cursor: pointer;
+      background: #2084f3;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+    }
+
+    #winner {
+      margin-top: 30px;
+      font-size: 32px;
+      font-weight: bold;
+      color: #d9534f;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 隨機抽獎系統</h1>
+
+  <p>請輸入參加者（每行一個名字）</p>
+
+  <textarea id="names" placeholder="例如：小明
+小美
+阿志"></textarea>
+  <br>
+
+  <button id="drawBtn">開始抽獎！</button>
+
+  <div id="winner"></div>
+
+  <script>
+    document.getElementById("drawBtn").onclick = () => {
+      const raw = document.getElementById("names").value;
+      
+      const list = raw.split("\n")
+                      .map(n => n.trim())
+                      .filter(n => n);
+
+      if (list.length === 0) {
+        alert("請至少輸入一位參加者！");
+        return;
+      }
+
+      const winner = list[Math.floor(Math.random() * list.length)];
+
+      document.getElementById("winner").textContent = "🎉 得獎者是：" + winner + " 🎉";
+    };
+  </script>
+</body>
+</html>
